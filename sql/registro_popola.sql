@@ -1,13 +1,13 @@
 USE registro;
 
 INSERT INTO utente (id_utente, email, password, cognome, nome) VALUES
-(1, 'mario.rossi@unimi.it', '1234', 'Rossi', 'Mario'),       -- docente
-(2, 'giulia.verdi@unimi.it', '5678', 'Verdi', 'Giulia'),     -- studente 1
-(3, 'luca.bianchi@unimi.it', '91011', 'Bianchi', 'Luca'),    -- studente 2
-(4, 'anna.neri@unimi.it', 'abcd', 'Neri', 'Anna'),           -- studente 3
-(5, 'francesco.ferri@unimi.it', 'qwerty', 'Ferri', 'Francesco'), -- studente 4
-(6, 'sara.rossi@unimi.it', 'pass123', 'Rossi', 'Sara'),      -- docente 2
-(7, 'fabio.conti@unimi.it', 'secret', 'Conti', 'Fabio');     -- studente 5
+(1, 'mario.rossi@polimi.it', '1234', 'Rossi', 'Mario'),       -- docente
+(2, 'giulia.verdi@polimi.it', '5678', 'Verdi', 'Giulia'),     -- studente 1
+(3, 'luca.bianchi@polimi.it', '91011', 'Bianchi', 'Luca'),    -- studente 2
+(4, 'anna.neri@polimi.it', 'abcd', 'Neri', 'Anna'),           -- studente 3
+(5, 'francesco.ferri@polimi.it', 'qwerty', 'Ferri', 'Francesco'), -- studente 4
+(6, 'sara.rossi@polimi.it', 'pass123', 'Rossi', 'Sara'),      -- docente 2
+(7, 'fabio.conti@polimi.it', 'secret', 'Conti', 'Fabio');     -- studente 5
 
 INSERT INTO docente (id_docente) VALUES
 (1),  -- Mario Rossi
@@ -23,7 +23,7 @@ INSERT INTO studente (id_studente, matricola, corso_laurea) VALUES
 INSERT INTO corso (id_corso, nome, cfu, id_docente) VALUES
 (1, 'Tecnologie Web', 6, 1),
 (2, 'Algoritmi e Strutture Dati', 9, 1),
-(3, 'Fisica Generale', 12, 6);
+(3, 'Fisica 1', 12, 6);
 
 INSERT INTO iscrizione_corso (id_studente, id_corso, anno) VALUES
 (2, 1, 2024),
@@ -50,10 +50,7 @@ INSERT INTO valutazione (id_studente, id_appello, voto, stato_valutazione, id_ve
 (3, 1, 'rimandato', 'verbalizzato', 1),
 (5, 1, 'assente', 'verbalizzato', 1),
 (7, 1, '30', 'verbalizzato', 1),
-
 (2, 2, '30L', 'verbalizzato', 2),
 (3, 2, 'riprovato', 'verbalizzato', 2),
-
 (2, 3, '24', 'verbalizzato', 3),
-
 (4, 4, '19', 'verbalizzato', 4);

@@ -2,23 +2,36 @@ package it.polimi.tiw.controllers;
 
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 
-
-
+import it.polimi.tiw.utilities.Config;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    
+    
     // Connessione al tuo DB
-    private final String DB_URL = "jdbc:mysql://localhost:3306/registro?serverTimezone=UTC";
-    private final String DB_USER = "root";
-    private final String DB_PASS = "Ennio15anita22!"; // inserisci la tua password se c'è
+    private String DB_URL;
+    private String DB_USER;
+    private String DB_PASS;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            Properties props = Config.getProperties();
+            DB_URL = props.getProperty("db.url");
+            DB_USER = props.getProperty("db.username");
+            DB_PASS = props.getProperty("db.password");
+        } catch (IOException e) {
+            throw new ServletException("Impossibile caricare le configurazioni del database", e);
+        }
+    }
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

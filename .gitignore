@@ -1,0 +1,23 @@
+# Eclipse specific
+.classpath
+.project
+.settings/
+.metadata/
+
+# Build output
+bin/
+build/
+target/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

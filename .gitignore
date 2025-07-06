@@ -21,5 +21,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# User specific
 src/main/resources/config.properties
-target/m2e-wtp/web-resources/META-INF/maven/it.polimi.tiw/registro/pom.properties
+

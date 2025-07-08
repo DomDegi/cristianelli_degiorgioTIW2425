@@ -6,5 +6,21 @@
          version="5.0">
 
     <display-name>TIW</display-name>
-
+    <context-param>
+		<param-name>dbUrl</param-name>
+		<param-value>jdbc:mysql://localhost:3306/registro?serverTimezone=UTC</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbUser</param-name>
+		<param-value>tiw_user</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbPassword</param-name>
+		<param-value>tiw_password</param-value>
+	</context-param>
+	<context-param>
+		<param-name>dbDriver</param-name>
+		<param-value>com.mysql.cj.jdbc.Driver</param-value>
+	</context-param>
+    
 </web-app>

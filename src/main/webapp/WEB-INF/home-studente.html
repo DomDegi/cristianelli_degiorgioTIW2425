@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+	<meta charset = "UTF-8">
+	<title>Home Studente</title>
+	<style >
+	body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        a.button {
+            background-color: #2980b9;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a.button:hover {
+            background-color: #1f6391;
+        }
+	</style>
+</head>
+<body>
+	<form th:action="@{/logout}" method="post" style="position: fixed; top: 20px; right: 20px;">
+		<button type="submit" style="background-color: red;">Logout</button>
+	</form>
+	<h1>Studente HomePage</h1>
+	<p>
+		Benvenuto, <strong th:text="${email}">Nome Studente</strong>!
+	</p>
+	<h2>Lista Corsi</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Corsi</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="corso : ${corsi}">
+				<td>
+					<a th:href="@{/home-studente(corsoId=${corso.IDCorso})}" th:text="${corso.nome}">Nome Corso</a>
+					(<span th:text="${corso.cfu}">CFU</span> CFU)
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div th:if="${appelli != null}">
+		<h2>Appelli del Corso</h2>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Data Appello</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="appello : ${appelli}">
+					<td th:text="${appello.data}">Data Appello</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

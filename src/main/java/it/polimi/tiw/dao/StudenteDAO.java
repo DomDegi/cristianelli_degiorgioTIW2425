@@ -1,0 +1,149 @@
+package it.polimi.tiw.dao;
+
+import it.polimi.tiw.beans.CorsoBean;
+import it.polimi.tiw.beans.AppelloBean;
+import it.polimi.tiw.beans.StudentiAppelloBean;
+import it.polimi.tiw.beans.StatoDiValutazione;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class StudenteDAO {
+	private Connection connection = null;
+	private int id_studente;
+	
+	public StudenteDAO(Connection connection, int id_studente) {
+		this.connection = connection;
+		this.id_studente = id_studente;
+	}
+
+	public List<CorsoBean> cercaCorsi() throws SQLException {
+		List<CorsoBean> corsi = new ArrayList<>();
+		String query = "SELECT c.id_corso, c.nome, c.cfu "
+		             + "FROM iscrizione_corso i "
+				     + "JOIN corso c ON i.id_corso = c.id_corso "
+                     + "WHERE i.id_studente = ? "
+				     + "ORDER BY c.nome;";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, id_studente);
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					CorsoBean corso = new CorsoBean();
+					corso.setIDCorso(result.getInt("id_corso"));
+					corso.setNome(result.getString("nome"));
+					corso.setCfu(result.getInt("cfu"));
+					corsi.add(corso);
+				}
+			}
+		}
+		return corsi;
+	}
+
+	// Cerca gli appelli di un determinato corso a cui è iscritto un certo studente
+	public List<AppelloBean> cercaAppelliStudente(int id_corso) throws SQLException {
+		List<AppelloBean> appelli = new ArrayList<>();
+		String query = "SELECT a.id_appello, a.data "
+		             + "FROM appello a "
+				     + "WHERE a.id_corso = ? "
+				     + "ORDER BY a.data;";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, id_corso);
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					AppelloBean appello = new AppelloBean();
+					appello.setIDAppello(result.getInt("id_appello"));
+					appello.setIDCorso(id_corso);
+					appello.setData(result.getDate("data"));
+					appelli.add(appello);
+				}
+			}
+		}
+		return appelli;
+	}
+	
+	// Restituisce la lista degli studenti iscritti al corso identificato da id_corso
+	public List<Integer> getStudentiIscrittiCorso(int id_corso) throws SQLException {
+		List<Integer> studenti = new ArrayList<>();
+		String query = "SELECT id_studente "
+					 + "FROM iscrizione_corso "
+				     + "WHERE id_corso = ?;";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, id_corso);
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					studenti.add(result.getInt("id_studente"));
+				}
+			}
+		}
+		return studenti;
+	}
+
+	// Restituisce la lista degli studenti iscritti all'appello identificato da id_appello
+	public List<Integer> getStudentiIscrittiAppello(int id_appello) throws SQLException {
+		List<Integer> studenti = new ArrayList<>();
+		String query = "SELECT v.id_studente "
+					 + "FROM valutazione v "
+				     + "WHERE v.id_appello = ?;";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, id_appello);
+			try (ResultSet result = pstatement.executeQuery()) {
+				while (result.next()) {
+					studenti.add(result.getInt("id_studente"));
+				}
+			}
+		}
+		return studenti;
+	}
+	
+	// Restituisce un oggetto che contiene tutte le informazioni da mostrare nella pagina esito riguardo l'appello dello studente
+	public StudentiAppelloBean getInfoAppello(int id_appello) throws SQLException {
+		StudentiAppelloBean infoAppello = new StudentiAppelloBean();
+		String query = "SELECT " +
+				"s.matricola, " +
+				"v.id_studente, " +
+				"v.id_appello, " +
+				"a.id_corso, " +
+				"u.nome, " +
+				"u.cognome, " +
+				"u.email, " +
+				"s.corso_laurea, " +
+				"c.nome AS nome_corso, " +
+				"v.voto, " +
+				"a.data, " +
+				"v.stato_valutazione " +
+			"FROM valutazione v " +
+			"JOIN studente s ON v.id_studente = s.id_studente " +
+			"JOIN utente u ON s.id_studente = u.id_utente " +
+			"JOIN appello a ON v.id_appello = a.id_appello " +
+			"JOIN corso c ON a.id_corso = c.id_corso " +
+			"WHERE v.id_appello = ? AND v.id_studente = ?;";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setInt(1, id_appello);
+			pstatement.setInt(2, this.id_studente); // assuming this.id_utente is the current student
+			try (ResultSet result = pstatement.executeQuery()) {
+				if (result.next()) {
+					infoAppello.setMatricola(result.getString("matricola"));
+					infoAppello.setIDStudente(result.getInt("id_studente"));
+					infoAppello.setIDAppello(result.getInt("id_appello"));
+					infoAppello.setIDCorso(result.getInt("id_corso"));
+					infoAppello.setNome(result.getString("nome"));
+					infoAppello.setCognome(result.getString("cognome"));
+					infoAppello.setEmail(result.getString("email"));
+					infoAppello.setCorsolaurea(result.getString("corso_laurea"));
+					infoAppello.setNomeCorso(result.getString("nome_corso"));
+					infoAppello.setVoto(result.getString("voto"));
+					infoAppello.setData(result.getDate("data"));
+					infoAppello.setStatoDiValutazione(StatoDiValutazione.valueOf(result.getString("stato_valutazione").toUpperCase()));
+				}
+			}
+		}
+		return infoAppello;
+	}
+	
+}

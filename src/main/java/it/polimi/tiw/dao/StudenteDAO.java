@@ -145,5 +145,30 @@ public class StudenteDAO {
 		}
 		return infoAppello;
 	}
+
+	// Imposta lo stato_valutazione a 'rifiutato' per uno studente e un appello
+	public void setRifiutato(int id_appello) throws SQLException {
+		String query = "UPDATE valutazione SET stato_valutazione = ? "
+					 + "WHERE id_studente = ? AND id_appello = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setString(1, "rifiutato");
+			pstatement.setInt(2, this.id_studente);
+			pstatement.setInt(3, id_appello);
+			pstatement.executeUpdate();
+		}
+	}
+
+	// Aggiorna sia il voto che lo stato_valutazione per uno studente e un appello
+	public void setVotoEStato(int id_appello, String voto, String statoValutazione) throws SQLException {
+		String query = "UPDATE valutazione SET voto = ?, stato_valutazione = ? "
+					 + "WHERE id_studente = ? AND id_appello = ?";
+		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
+			pstatement.setString(1, voto);
+			pstatement.setString(2, statoValutazione);
+			pstatement.setInt(3, this.id_studente);
+			pstatement.setInt(4, id_appello);
+			pstatement.executeUpdate();
+		}
+	}
 	
 }

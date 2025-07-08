@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Esito Appello</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 30px; }
+        h1 { color: #2c3e50; }
+        table { border-collapse: collapse; background: #fff; margin-top: 20px; }
+        th, td { border: 1px solid #aaa; padding: 10px 20px; }
+        th { background: #3498db; color: #fff; }
+        .label { font-weight: bold; color: #2c3e50; }
+        .value { color: #333; }
+        .section { margin-bottom: 30px; }
+        .button { background: #2980b9; color: #fff; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; }
+        .button:hover { background: #1f6391; }
+    </style>
+</head>
+<body>
+    <h1>Esito Appello</h1>
+    <div class="section">
+        <table>
+            <tr>
+                <th class="label">Matricola</th>
+                <td class="value" th:text="${infoAppello.matricola}">matricola</td>
+            </tr>
+            <tr>
+                <th class="label">Nome</th>
+                <td class="value" th:text="${infoAppello.nome}">nome</td>
+            </tr>
+            <tr>
+                <th class="label">Cognome</th>
+                <td class="value" th:text="${infoAppello.cognome}">cognome</td>
+            </tr>
+            <tr>
+                <th class="label">Email</th>
+                <td class="value" th:text="${infoAppello.email}">email</td>
+            </tr>
+            <tr>
+                <th class="label">Corso di Laurea</th>
+                <td class="value" th:text="${infoAppello.corsolaurea}">corso laurea</td>
+            </tr>
+            <tr>
+                <th class="label">Corso</th>
+                <td class="value" th:text="${infoAppello.nomeCorso}">nome corso</td>
+            </tr>
+            <tr>
+                <th class="label">Data Appello</th>
+                <td class="value" th:text="${#dates.format(infoAppello.data, 'dd/MM/yyyy')}">data</td>
+            </tr>
+            <tr>
+                <th class="label">Voto</th>
+                <td class="value" th:text="${infoAppello.voto}">voto</td>
+            </tr>
+            <tr>
+                <th class="label">Stato Valutazione</th>
+                <td class="value" th:text="${infoAppello.statoDiValutazione}">stato</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <a th:href="@{/home-studente}" class="button">Torna alla Home Studente</a>
+    </div>
+</body>
+</html> 

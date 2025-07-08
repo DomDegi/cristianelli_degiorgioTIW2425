@@ -84,7 +84,9 @@
 			</thead>
 			<tbody>
 				<tr th:each="appello : ${appelli}">
-					<td th:text="${appello.data}">Data Appello</td>
+					<td>
+						<a th:href="@{/esito(id_appello=${appello.IDAppello})}" th:text="${appello.data}">Data Appello</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

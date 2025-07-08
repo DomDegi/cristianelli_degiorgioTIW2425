@@ -73,12 +73,35 @@ public class EsitoServlet extends HttpServlet{
 			
 			StudentiAppelloBean infoAppello = studenteDAO.getInfoAppello(id_appello);
 			ctx.setVariable("infoAppello", infoAppello);
-			
 		}
 		catch (SQLException e) {
-			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile recuperare i dati");
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile recuperare l'esito dell'appello");
 			return;
 		}
+		catch (NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "L'id dell'appello non è valido");
+			return;
+		}
+		templateEngine.process("/WEB-INF/esito.html", ctx, response.getWriter());
+	}
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+		String appelloIdParam = request.getParameter("id_appello");
+		int id_appello = Integer.parseInt(appelloIdParam);
+
+		StudenteDAO studenteDAO = new StudenteDAO(connection, utente.getIDUtente());
+
+		// aggiorno lo stato di valutazione nel database ponendolo a rifiutato
+		try {
+			studenteDAO.setRifiutato(id_appello);
+		} catch (SQLException e) {
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile rifiutare il voto");
+			return;
+		}
+		doGet(request, response);
 	}
 	
 	

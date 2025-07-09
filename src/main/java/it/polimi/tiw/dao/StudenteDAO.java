@@ -45,15 +45,17 @@ public class StudenteDAO {
 		return corsi;
 	}
 
-	// Cerca gli appelli di un determinato corso a cui è iscritto un certo studente
+	// Cerca gli appelli di un determinato corso a cui lo studente è iscritto (cioè per cui esiste una valutazione)
 	public List<AppelloBean> cercaAppelliStudente(int id_corso) throws SQLException {
 		List<AppelloBean> appelli = new ArrayList<>();
-		String query = "SELECT a.id_appello, a.data "
-		             + "FROM appello a "
-				     + "WHERE a.id_corso = ? "
-				     + "ORDER BY a.data;";
+		String query = "SELECT a.id_appello, a.data " +
+                       "FROM appello a " +
+                       "JOIN valutazione v ON a.id_appello = v.id_appello " +
+                       "WHERE a.id_corso = ? AND v.id_studente = ? " +
+                       "ORDER BY a.data;";
 		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
 			pstatement.setInt(1, id_corso);
+			pstatement.setInt(2, id_studente);
 			try (ResultSet result = pstatement.executeQuery()) {
 				while (result.next()) {
 					AppelloBean appello = new AppelloBean();

@@ -66,12 +66,16 @@ public class EsitoServlet extends HttpServlet{
 			StudenteDAO studenteDAO = new StudenteDAO(connection,utente.getIDUtente());
 			List<Integer> studenti = studenteDAO.getStudentiIscrittiAppello(id_appello);
 			if (!studenti.contains(utente.getIDUtente())) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Lo studente non ha dato questo appello");
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Non sei iscritto a questo appello");
 				return;
 			}
 			// Caricamento le informazioni dell'appello dello studente
-			
 			StudentiAppelloBean infoAppello = studenteDAO.getInfoAppello(id_appello);
+			if (infoAppello.getVoto() == null) {
+				ctx.setVariable("erroreAppello", "Non ti sei iscritto a questo appello");
+				templateEngine.process("/WEB-INF/esito.html", ctx, response.getWriter());
+				return;
+			}
 			ctx.setVariable("infoAppello", infoAppello);
 		}
 		catch (SQLException e) {

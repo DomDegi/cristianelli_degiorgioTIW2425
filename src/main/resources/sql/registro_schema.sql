@@ -72,7 +72,7 @@ CREATE TABLE valutazione (
   id_studente INT NOT NULL,
   id_appello INT NOT NULL,
   voto ENUM('', 'assente', 'rimandato', 'riprovato', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '30L') NOT NULL DEFAULT '',
-  stato_valutazione ENUM('non inserito', 'inserito', 'pubblicato', 'rifiutato', 'verbalizzato') NOT NULL DEFAULT 'non inserito',
+  stato_valutazione ENUM('NON_INSERITO', 'INSERITO', 'PUBBLICATO', 'RIFIUTATO', 'VERBALIZZATO') NOT NULL DEFAULT 'NON_INSERITO',
   id_verbale INT,
   PRIMARY KEY (id_studente, id_appello),
   FOREIGN KEY (id_studente) REFERENCES studente(id_studente) ON DELETE CASCADE ON UPDATE CASCADE,

@@ -21,7 +21,7 @@ import it.polimi.tiw.beans.UtenteBean;
 import it.polimi.tiw.dao.StudenteDAO;
 
 @WebServlet("/home-studente")
-public class HomeStudenteServlet extends HttpServlet {
+public class HomeStudente extends HttpServlet {
 	
     private static final long serialVersionUID = 1L;
     private Connection connection = null;

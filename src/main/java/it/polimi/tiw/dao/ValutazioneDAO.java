@@ -122,25 +122,4 @@ public class ValutazioneDAO {
         return verbale;
     }
 
-    // Seleziona i dati dell'ultimo verbale creato (globale, non solo per questo appello)
-    public VerbaleBean idVerb() throws SQLException {
-        VerbaleBean verbale = new VerbaleBean();
-        String query = "SELECT v.id_verbale, v.codice_verbale, v.id_appello, a.data AS data_appello, v.data_ora, TIME(v.data_ora) as ora " +
-                "FROM verbale v " +
-                "JOIN appello a ON v.id_appello = a.id_appello " +
-                "WHERE v.id_verbale = (SELECT MAX(id_verbale) FROM verbale)";
-        try (PreparedStatement pstatement = con.prepareStatement(query)) {
-            try (ResultSet result = pstatement.executeQuery()) {
-                if (result.next()) {
-                    verbale.setIDVerbale(result.getInt("id_verbale"));
-                    verbale.setCodice(result.getString("codice_verbale"));
-                    verbale.setIDAppello(result.getInt("id_appello"));
-                    verbale.setDataAppello(result.getDate("data_appello"));
-                    verbale.setDataVerbale(result.getTimestamp("data_ora"));
-                    verbale.setOra(result.getTime("ora").toLocalTime());
-                }
-            }
-        }
-        return verbale;
-    }
 } 

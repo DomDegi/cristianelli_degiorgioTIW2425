@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Verbale Appello</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <h1>Verbale Appello</h1>
+    <div>
+        <p><strong>Codice Verbale:</strong> <span th:text="${verbale.codice}"></span></p>
+        <p><strong>Data:</strong> <span th:text="${verbale.dataAppello}"></span></p>
+        <p><strong>ID Appello:</strong> <span th:text="${verbale.id_appello}"></span></p>
+    </div>
+    <h2>Studenti Verbalizzati</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Matricola</th>
+                <th>Cognome</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Corso di Laurea</th>
+                <th>Voto</th>
+                <th>Stato</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="studente : ${infoverbalizzati}">
+                <td th:text="${studente.matricola}"></td>
+                <td th:text="${studente.cognome}"></td>
+                <td th:text="${studente.nome}"></td>
+                <td th:text="${studente.email}"></td>
+                <td th:text="${studente.corsoLaurea}"></td>
+                <td th:text="${studente.voto}"></td>
+                <td th:text="${studente.statoDiValutazione}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="home-docente">Torna alla Home</a>
+</body>
+</html>

@@ -2,28 +2,28 @@ package it.polimi.tiw.filters;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Filter per l'autorizzazione degli studenti
  * Controlla che l'utente autenticato sia uno studente prima di accedere alle pagine degli studenti
  */
 @WebFilter({"/home-studente", "/esito"})
-public class StudentAuthorizationFilter implements Filter {
+public class StudenteChecker implements Filter {
 
     /**
      * Default constructor.
      */
-    public StudentAuthorizationFilter() {
+    public StudenteChecker() {
         // TODO Auto-generated constructor stub
     }
 

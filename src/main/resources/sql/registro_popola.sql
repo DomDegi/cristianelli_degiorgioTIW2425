@@ -59,6 +59,7 @@ INSERT INTO iscrizione_corso (id_studente, id_corso, anno) VALUES
 (10, 3, 2024),
 (12, 7, 2024);
 
+
 -- Appelli
 INSERT INTO appello (id_appello, id_corso, data) VALUES
 (1, 1, '2025-06-15'),

@@ -20,7 +20,7 @@ import it.polimi.tiw.utilities.DBConnection;
  * Servlet implementation class Logout
  */
 @WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection = null;
 	private TemplateEngine templateEngine;
@@ -28,7 +28,7 @@ public class LogoutServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LogoutServlet() {
+	public Logout() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

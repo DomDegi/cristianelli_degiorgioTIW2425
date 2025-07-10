@@ -31,7 +31,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * Servlet implementation class esito
  */
 @WebServlet("/esito")
-public class EsitoServlet extends HttpServlet{
+public class EsitoStudente extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private Connection connection = null;
 	private TemplateEngine templateEngine;
@@ -39,7 +39,7 @@ public class EsitoServlet extends HttpServlet{
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EsitoServlet() {
+	public EsitoStudente() {
 		// TODO Auto-generated constructor stub
 	}
 	

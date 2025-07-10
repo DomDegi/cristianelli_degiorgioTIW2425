@@ -9,7 +9,6 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -18,7 +17,6 @@ import jakarta.servlet.http.HttpSession;
  * Filter per l'autenticazione degli utenti
  * Controlla che l'utente sia autenticato prima di accedere alle pagine protette
  */
-@WebFilter("/*")
 public class Checker implements Filter {
 
     /**
@@ -77,14 +75,14 @@ public class Checker implements Filter {
         }
         
         // Controlla se l'utente è autenticato
-        if (session == null || session.getAttribute("user") == null) {
-            System.out.println("User not authenticated, redirecting to login");
+        if (session == null || session.getAttribute("utente") == null) {
+            System.out.println("Utente non autenticato, verrà reinderizzato al login");
             res.sendRedirect(loginPath);
             return;
         }
         
         // Utente autenticato, continua con la richiesta
-        System.out.println("User authenticated: " + session.getAttribute("user"));
+        System.out.println("Utente autenticato: " + session.getAttribute("utente"));
         chain.doFilter(request, response);
     }
 

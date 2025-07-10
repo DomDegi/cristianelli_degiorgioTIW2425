@@ -68,6 +68,10 @@
         <filter-name>DocenteChecker</filter-name>
         <url-pattern>/elenco-verbali</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>DocenteChecker</filter-name>
+        <url-pattern>/pagina-verbale</url-pattern>
+    </filter-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

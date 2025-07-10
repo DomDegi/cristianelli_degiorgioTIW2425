@@ -57,7 +57,7 @@ public class PaginaVerbale extends HttpServlet {
         VerbaleBean verbale = new VerbaleBean();
         List<IscrittiBean> studentiAggiornati = new ArrayList<>();
         try {
-            String appelloIdParam = request.getParameter("appId");
+            String appelloIdParam = request.getParameter("id_appello");
             appid = Integer.parseInt(appelloIdParam);
 
             AppelloDAO appelloDAO = new AppelloDAO(connection, appid);

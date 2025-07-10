@@ -42,7 +42,7 @@ public class DocenteDAO {
     // Cerca i verbali di un certo docente
     public List<DocenteVerbaleBean> cercaVerbali() throws SQLException {
         List<DocenteVerbaleBean> verbali = new ArrayList<>();
-        String query = "SELECT c.nome AS nome_corso, v.data AS dataVerbale, a.data AS dataAppello " +
+        String query = "SELECT c.nome AS nome_corso, v.data_ora AS dataVerbale, a.data AS dataAppello " +
                 "FROM verbale v " +
                 "JOIN appello a ON v.id_appello = a.id_appello " +
                 "JOIN corso c ON a.id_corso = c.id_corso " +

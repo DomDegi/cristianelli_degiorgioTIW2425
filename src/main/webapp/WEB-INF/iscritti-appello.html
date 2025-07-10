@@ -33,7 +33,7 @@
                 <td th:text="${iscritto.voto}">28</td>
                 <td th:text="${iscritto.statoDiValutazione}">Approvato</td>
                 <td th:if="${iscritto.statoDiValutazione.name() != 'PUBBLICATO' and iscritto.statoDiValutazione.name() != 'RIFIUTATO' and iscritto.statoDiValutazione.name() != 'VERBALIZZATO'}">
-                    <a th:href="@{'/ModificaStudente?id_studente=' + ${iscritto.idStudente} + '&id_appello=' + ${iscritto.IDAppello}}">
+                    <a th:href="@{'/inserisci-valutazione?id_studente=' + ${iscritto.idStudente} + '&id_appello=' + ${iscritto.IDAppello}}">
                         <button>MODIFICA</button>
                     </a>
                 </td>

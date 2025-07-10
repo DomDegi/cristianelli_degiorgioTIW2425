@@ -25,8 +25,8 @@ import it.polimi.tiw.dao.AppelloDAO;
 import it.polimi.tiw.dao.StudenteDAO;
 import it.polimi.tiw.utilities.DBConnection;
 
-@WebServlet("/modifica-studente")
-public class ModificaStudente extends HttpServlet {
+@WebServlet("/inserisci-valutazione")
+public class InserisciValutazione extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private Connection connection = null;
     private TemplateEngine templateEngine;
@@ -83,7 +83,7 @@ public class ModificaStudente extends HttpServlet {
             request.getSession().removeAttribute("error_message");
         }
 
-        templateEngine.process("/WEB-INF/modificaStudente.html", ctx, response.getWriter());
+        templateEngine.process("/WEB-INF/inserisci-valutazione.html", ctx, response.getWriter());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

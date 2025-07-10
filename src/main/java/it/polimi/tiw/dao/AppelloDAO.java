@@ -32,7 +32,7 @@ public class AppelloDAO {
             orderDirection = "ASC"; // default direction
         }
 
-        String query = "SELECT s.id_studente, s.matricola, s.cognome, s.nome, u.email, s.corso_laurea, v.voto, v.stato_valutazione " +
+        String query = "SELECT s.id_studente, s.matricola, u.cognome, u.nome, u.email, s.corso_laurea, v.voto, v.stato_valutazione " +
                 "FROM appello a " +
                 "JOIN valutazione v ON a.id_appello = v.id_appello " +
                 "JOIN studente s ON v.id_studente = s.id_studente " +
@@ -46,8 +46,8 @@ public class AppelloDAO {
                     IscrittiBean iscritti = new IscrittiBean();
                     iscritti.setIdStudente(result.getInt("id_studente"));
                     iscritti.setMatricola(result.getString("matricola"));
-                    iscritti.setNome(result.getString("nome"));
                     iscritti.setCognome(result.getString("cognome"));
+                    iscritti.setNome(result.getString("nome"));
                     iscritti.setEmail(result.getString("email"));
                     iscritti.setCorsoLaurea(result.getString("corso_laurea"));
                     iscritti.setVoto(result.getString("voto"));

@@ -23,7 +23,7 @@ import it.polimi.tiw.beans.DocenteBean;
 import it.polimi.tiw.dao.AppelloDAO;
 import it.polimi.tiw.utilities.DBConnection;
 
-@WebServlet("/Iscritti")
+@WebServlet("/iscritti-appello")
 public class Iscritti extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private Connection connection = null;
@@ -78,7 +78,7 @@ public class Iscritti extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Il parametro id_appello deve essere un intero valido");
             return;
         }
-        templateEngine.process("/WEB-INF/iscritti.html", ctx, response.getWriter());
+        templateEngine.process("/WEB-INF/iscritti-appello.html", ctx, response.getWriter());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

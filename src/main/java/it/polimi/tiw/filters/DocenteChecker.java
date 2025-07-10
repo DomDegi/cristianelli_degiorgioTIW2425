@@ -48,7 +48,7 @@ public class DocenteChecker implements Filter {
         }
 
         // Qui sei sicuro che è un docente autenticato
-        System.out.println("Docente autorizzato: " + utente.getEmail());
+        System.out.println("Docente autenticato: " + utente.getEmail());
         chain.doFilter(request, response);
     }
 

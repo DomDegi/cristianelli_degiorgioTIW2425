@@ -13,13 +13,13 @@
     <table border="1">
         <thead>
             <tr>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='matricola', orderDirection=${orderBy == 'matricola' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Matricola</a></th>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='cognome', orderDirection=${orderBy == 'cognome' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Cognome</a></th>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='nome', orderDirection=${orderBy == 'nome' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Nome</a></th>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='email', orderDirection=${orderBy == 'email' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Email</a></th>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='corso_laurea', orderDirection=${orderBy == 'corso_laurea' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Laurea</a></th>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='voto', orderDirection=${orderBy == 'voto' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Voto</a></th>
-                <th><a th:href="@{/Iscritti(id_appello=${iscritti[0].IDAppello}, orderBy='stato_valutazione', orderDirection=${orderBy == 'stato_valutazione' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Stato Valutazione</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='matricola', orderDirection=${orderBy == 'matricola' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Matricola</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='cognome', orderDirection=${orderBy == 'cognome' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Cognome</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='nome', orderDirection=${orderBy == 'nome' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Nome</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='email', orderDirection=${orderBy == 'email' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Email</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='corso_laurea', orderDirection=${orderBy == 'corso_laurea' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Laurea</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='voto', orderDirection=${orderBy == 'voto' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Voto</a></th>
+                <th><a th:href="@{/iscritti-appello(id_appello=${iscritti[0].IDAppello}, orderBy='stato_valutazione', orderDirection=${orderBy == 'stato_valutazione' and orderDirection == 'ASC' ? 'DESC' : 'ASC'})}">Stato Valutazione</a></th>
                 <th>Azioni</th>
             </tr>
         </thead>
@@ -40,7 +40,7 @@
             </tr>
         </tbody>
     </table>
-    <form th:action="@{'/Iscritti?id_appello=' + ${iscritti[0].IDAppello}}" method="post">
+    <form th:action="@{'/iscritti-appello?id_appello=' + ${iscritti[0].IDAppello}}" method="post">
         <button type="submit">PUBBLICA</button>
     </form>
     <form th:action="@{'/PaginaVerbale?id_appello=' + ${iscritti[0].IDAppello}}" method="post">

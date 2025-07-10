@@ -2,7 +2,7 @@ package it.polimi.tiw.dao;
 
 import it.polimi.tiw.beans.CorsoBean;
 import it.polimi.tiw.beans.AppelloBean;
-import it.polimi.tiw.beans.StudentiAppelloBean;
+import it.polimi.tiw.beans.StudenteAppelloBean;
 import it.polimi.tiw.beans.StatoDiValutazione;
 
 import java.sql.Connection;
@@ -104,8 +104,8 @@ public class StudenteDAO {
 	}
 	
 	// Restituisce un oggetto che contiene tutte le informazioni da mostrare nella pagina esito riguardo l'appello dello studente
-	public StudentiAppelloBean getInfoAppello(int id_appello) throws SQLException {
-		StudentiAppelloBean infoAppello = new StudentiAppelloBean();
+	public StudenteAppelloBean getInfoAppello(int id_appello) throws SQLException {
+		StudenteAppelloBean infoAppello = new StudenteAppelloBean();
 		String query = "SELECT " +
 				"s.matricola, " +
 				"v.id_studente, " +

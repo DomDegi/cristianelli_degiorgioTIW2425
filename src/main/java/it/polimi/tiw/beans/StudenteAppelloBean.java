@@ -3,7 +3,7 @@ package it.polimi.tiw.beans;
 import java.sql.Date;
 
 
-public class StudentiAppelloBean {
+public class StudenteAppelloBean {
     private String matricola;
     private int id_studente;
     private int id_appello;
@@ -17,7 +17,7 @@ public class StudentiAppelloBean {
     private Date data;
     private StatoDiValutazione statoDiValutazione;
 
-    public StudentiAppelloBean() {}
+    public StudenteAppelloBean() {}
 
     public String getMatricola() {
         return matricola;

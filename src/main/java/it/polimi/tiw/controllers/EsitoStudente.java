@@ -17,7 +17,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import org.thymeleaf.web.IWebExchange;
 
 import it.polimi.tiw.beans.UtenteBean;
-import it.polimi.tiw.beans.StudentiAppelloBean;
+import it.polimi.tiw.beans.StudenteAppelloBean;
 import it.polimi.tiw.dao.StudenteDAO;
 import it.polimi.tiw.utilities.DBConnection;
 import jakarta.servlet.ServletContext;
@@ -71,7 +71,7 @@ public class EsitoStudente extends HttpServlet{
 				return;
 			}
 			// Caricamento le informazioni dell'appello dello studente
-			StudentiAppelloBean infoAppello = studenteDAO.getInfoAppello(id_appello);
+			StudenteAppelloBean infoAppello = studenteDAO.getInfoAppello(id_appello);
 			if (infoAppello.getVoto() == null) {
 				ctx.setVariable("erroreAppello", "Non ti sei iscritto a questo appello");
 				templateEngine.process("/WEB-INF/esito.html", ctx, response.getWriter());

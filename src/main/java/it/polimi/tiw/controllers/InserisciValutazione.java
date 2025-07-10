@@ -115,6 +115,6 @@ public class InserisciValutazione extends HttpServlet {
             return;
         }
 
-        response.sendRedirect(getServletContext().getContextPath() + "/Iscritti?id_appello=" + appid);
+        response.sendRedirect(getServletContext().getContextPath() + "/iscritti-appello?id_appello=" + appid);
     }
 } 

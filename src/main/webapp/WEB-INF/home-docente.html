@@ -43,7 +43,7 @@
             <tbody>
                 <tr th:each="appello : ${appelli}">
                     <td>
-                        <a th:href="@{/Iscritti(id_appello=${appello.IDAppello})}" th:text="${appello.data}">Data Appello</a>
+                        <a th:href="@{/iscritti-appello(id_appello=${appello.IDAppello})}" th:text="${appello.data}">Data Appello</a>
                     </td>
                 </tr>
             </tbody>

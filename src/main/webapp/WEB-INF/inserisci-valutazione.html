@@ -12,7 +12,7 @@
     
     <h1>Inserisci Valutazione</h1>
 
-    <form th:action="@{'/inserisci-valutazione?studenteId=' + ${iscritto.idStudente} + '&appId=' + ${iscritto.idAppello}}" method="post">
+    <form th:action="@{'/inserisci-valutazione?id_studente=' + ${iscritto.IDStudente} + '&id_appello=' + ${iscritto.IDAppello}}" method="post">
         <p>
             <strong>Matricola:</strong> <span th:text="${iscritto.matricola}">123456</span>
         </p>
@@ -26,7 +26,7 @@
             <strong>Email:</strong> <span th:text="${iscritto.email}">mario.rossi@email.it</span>
         </p>
         <p>
-            <strong>Corso di Laurea:</strong> <span th:text="${iscritto.corsoLaurea}">Ingegneria Informatica</span>
+            <strong>Corso di Laurea:</strong> <span th:text="${iscritto.corsolaurea}">Ingegneria Informatica</span>
         </p>
 
         <p>
@@ -47,8 +47,8 @@
                 <option value="29">29</option>
                 <option value="30">30</option>
                 <option value="30L">30L</option>
-                <option value="ASSENTE">Assente</option>
-                <option value="RIPROVATO">Riprovato</option>
+                <option value="assente">Assente</option>
+                <option value="riprovato">Riprovato</option>
             </select>
         </p>
 

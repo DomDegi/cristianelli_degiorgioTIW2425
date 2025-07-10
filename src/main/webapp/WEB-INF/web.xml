@@ -47,6 +47,28 @@
         <url-pattern>/esito</url-pattern>
     </filter-mapping>
 
+    <!-- Filter per autorizzazione docente -->
+    <filter>
+        <filter-name>DocenteChecker</filter-name>
+        <filter-class>it.polimi.tiw.filters.DocenteChecker</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DocenteChecker</filter-name>
+        <url-pattern>/home-docente</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DocenteChecker</filter-name>
+        <url-pattern>/Iscritti</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DocenteChecker</filter-name>
+        <url-pattern>/inserisci-valutazione</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>DocenteChecker</filter-name>
+        <url-pattern>/elenco-verbali</url-pattern>
+    </filter-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>

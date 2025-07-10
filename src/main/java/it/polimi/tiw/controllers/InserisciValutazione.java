@@ -49,9 +49,9 @@ public class InserisciValutazione extends HttpServlet {
         IWebExchange webExchange = application.buildExchange(request, response);
         WebContext ctx = new WebContext(webExchange, request.getLocale());
         try {
-            String studenteIdParam = request.getParameter("studenteId");
+            String studenteIdParam = request.getParameter("id_studente");
             int studenteid = Integer.parseInt(studenteIdParam);
-            String appelloIdParam = request.getParameter("appId");
+            String appelloIdParam = request.getParameter("id_appello");
             int appid = Integer.parseInt(appelloIdParam);
 
             AppelloDAO appelloDAO = new AppelloDAO(connection, appid);
@@ -90,19 +90,19 @@ public class InserisciValutazione extends HttpServlet {
             throws ServletException, IOException {
         int appid;
         try {
-            String studenteIdParam = request.getParameter("studenteId");
+            String studenteIdParam = request.getParameter("id_studente");
             int studenteid = Integer.parseInt(studenteIdParam);
-            String appelloIdParam = request.getParameter("appId");
+            String appelloIdParam = request.getParameter("id_appello");
             appid = Integer.parseInt(appelloIdParam);
             String voto = request.getParameter("voto");
             StudenteDAO studenteDAO = new StudenteDAO(connection, studenteid);
             Set<String> votiValidi = Set.of("18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
-                    "30", "30L", "ASSENTE", "30l", "RIPROVATO");
+                    "30", "30L", "assente", "riprovato");
 
             if (!votiValidi.contains(voto)) {
                 request.getSession().setAttribute("error_message", "Voto non accettato, riprova");
-                response.sendRedirect(getServletContext().getContextPath() + "/modifica-studente?studenteId="
-                        + studenteid + "&appId=" + appid);
+                response.sendRedirect(getServletContext().getContextPath() + "/inserisci-valutazione?id_studente="
+                        + studenteid + "&id_appello=" + appid);
                 return;
             }
 
@@ -111,10 +111,10 @@ public class InserisciValutazione extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile modificare il voto");
             return;
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Il parametro corsoId deve essere un intero valido");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "I parametri devono essere interi validi");
             return;
         }
 
-        response.sendRedirect(getServletContext().getContextPath() + "/Iscritti?appId=" + appid);
+        response.sendRedirect(getServletContext().getContextPath() + "/Iscritti?id_appello=" + appid);
     }
 } 

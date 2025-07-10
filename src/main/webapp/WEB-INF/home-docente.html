@@ -26,7 +26,7 @@
         <tbody>
             <tr th:each="corso : ${corsi}">
                 <td>
-                    <a th:href="@{/DocenteHomePage(corsoId=${corso.IDCorso})}" th:text="${corso.nome}">Nome Corso</a>
+                    <a th:href="@{/home-docente(id_corso=${corso.IDCorso})}" th:text="${corso.nome}">Nome Corso</a>
                     (<span th:text="${corso.cfu}">CFU</span> CFU)
                 </td>
             </tr>
@@ -43,7 +43,7 @@
             <tbody>
                 <tr th:each="appello : ${appelli}">
                     <td>
-                        <a th:href="@{/Iscritti(appId=${appello.IDAppello})}" th:text="${appello.data}">Data Appello</a>
+                        <a th:href="@{/Iscritti(id_appello=${appello.IDAppello})}" th:text="${appello.data}">Data Appello</a>
                     </td>
                 </tr>
             </tbody>

@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Verbale Appello</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <meta charset="UTF-8">
+    <title>Verbale</title>
 </head>
 <body>
-    <h1>Verbale Appello</h1>
-    <div>
-        <p><strong>Codice Verbale:</strong> <span th:text="${verbale.codice}"></span></p>
-        <p><strong>Data:</strong> <span th:text="${verbale.dataAppello}"></span></p>
-        <p><strong>ID Appello:</strong> <span th:text="${verbale.id_appello}"></span></p>
-    </div>
-    <h2>Studenti Verbalizzati</h2>
-    <table>
+    <form th:action="@{/logout}" method="post" style="position: fixed; top: 20px; right: 20px;">
+        <button type="submit" style="background-color: red;">Logout</button>
+    </form>
+    
+    <h1>Dettagli Verbale</h1>
+
+    <p>
+        <strong>Codice verbale:</strong> <span th:text="${verbale.codice}">123ABC</span>
+    </p>
+
+    <p>
+        <strong>Data verbale:</strong> <span th:text="${#dates.format(verbale.dataVerbale, 'dd/MM/yyyy')}">2025-05-15</span>
+    </p>
+
+    <p>
+        <strong>Ora verbale:</strong> <span th:text="${verbale.ora}">14:30</span>
+    </p>
+
+    <p>
+        <strong>Data appello:</strong> <span th:text="${#dates.format(verbale.dataAppello, 'dd/MM/yyyy')}">2025-05-15</span>
+    </p>
+
+    <table border="1">
         <thead>
             <tr>
                 <th>Matricola</th>
                 <th>Cognome</th>
                 <th>Nome</th>
-                <th>Email</th>
-                <th>Corso di Laurea</th>
                 <th>Voto</th>
                 <th>Stato</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="studente : ${infoverbalizzati}">
-                <td th:text="${studente.matricola}"></td>
-                <td th:text="${studente.cognome}"></td>
-                <td th:text="${studente.nome}"></td>
-                <td th:text="${studente.email}"></td>
-                <td th:text="${studente.corsoLaurea}"></td>
-                <td th:text="${studente.voto}"></td>
-                <td th:text="${studente.statoDiValutazione}"></td>
+            <tr th:each="infoverbalizzati : ${infoverbalizzati}">
+                <td th:text="${infoverbalizzati.matricola}">123456</td>
+                <td th:text="${infoverbalizzati.cognome}">Rossi</td>
+                <td th:text="${infoverbalizzati.nome}">Mario</td>
+                <td th:text="${infoverbalizzati.voto}">28</td>
+                <td th:text="${infoverbalizzati.statoDiValutazione}">VERBALIZZATO</td>
             </tr>
         </tbody>
     </table>
-    <a href="home-docente">Torna alla Home</a>
+
+    <div style="margin-top: 20px;">
+        <a th:href="@{/home-docente}">Torna alla Home Docente</a>
+    </div>
 </body>
 </html>

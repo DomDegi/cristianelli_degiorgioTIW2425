@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/styles/style.css}">
-    <meta charset="UTF-8">
-    <title>Elenco verbali</title>
+<link rel="stylesheet" href="style.css">
+<meta charset="ISO-8859-1">
+<title>Elenco verbali</title>
 </head>
 <body>
-    <form th:action="@{/logout}" method="post" style="position: fixed; top: 20px; right: 20px;">
-        <button type="submit" style="background-color: red;">Logout</button>
-    </form>
-    
-    <h1>Elenco verbali</h1>
+	<form th:action="@{/logout}" method="post"
+		style="position: fixed; top: 20px; right: 20px;">
+		<button type="submit" style="background-color: red;">Logout</button>
+	</form>
+	<h1>Elenco verbali</h1>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nome corso</th>
-                <th>Data appello</th>
-                <th>Data verbale</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="infoverbale : ${infoverbale}">
-                <td th:text="${infoverbale.nomeCorso}">Nome Corso</td>
-                <td th:text="${#dates.format(infoverbale.dataAppello, 'dd/MM/yyyy')}">Data Appello</td>
-                <td th:text="${#dates.format(infoverbale.dataVerbale, 'dd/MM/yyyy')}">Data Verbale</td>
-            </tr>
-        </tbody>
-    </table>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Nome corso</th>
+				<th>Data appello</th>
+				<th>Data verbale</th>
 
-    <div style="margin-top: 20px;">
-        <a th:href="@{/home-docente}">Torna alla Home Docente</a>
-    </div>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="infoverbale : ${infoverbale}">
+				<td th:text="${infoverbale.nomeCorso}">123456</td>
+				<td th:text="${infoverbale.dataAppello}">Rossi</td>
+				<td th:text="${infoverbale.dataVerbale}">Mario</td>
+
+
+			</tr>
+		</tbody>
+
+	</table>
+
+
+
+
 </body>
 </html> 

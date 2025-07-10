@@ -21,6 +21,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import it.polimi.tiw.beans.IscrittiBean;
 import it.polimi.tiw.beans.DocenteBean;
 import it.polimi.tiw.dao.AppelloDAO;
+import it.polimi.tiw.dao.ValutazioneDAO;
 import it.polimi.tiw.utilities.DBConnection;
 
 @WebServlet("/iscritti-appello")
@@ -69,6 +70,12 @@ public class Iscritti extends HttpServlet {
             ctx.setVariable("iscritti", iscritti);
             ctx.setVariable("orderBy", orderBy);
             ctx.setVariable("orderDirection", orderDirection);
+
+            // Controlla se ci sono studenti da verbalizzare (PUBBLICATO o RIFIUTATO)
+            ValutazioneDAO valutazioneDAO = new ValutazioneDAO(connection, id_appello);
+            List<Integer> studentiDaVerbalizzare = valutazioneDAO.getIDStudentiPubbORif();
+            boolean ciSonoStudentiDaVerbalizzare = !studentiDaVerbalizzare.isEmpty();
+            ctx.setVariable("ciSonoStudentiDaVerbalizzare", ciSonoStudentiDaVerbalizzare);
 
         } catch (SQLException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,

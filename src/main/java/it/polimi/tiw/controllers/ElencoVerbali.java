@@ -66,7 +66,7 @@ public class ElencoVerbali extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile recuperare i verbali per questo docente");
             return;
         }
-        templateEngine.process("/WEB-INF/elencoVerbali.html", ctx, response.getWriter());
+        templateEngine.process("/WEB-INF/elenco-verbali.html", ctx, response.getWriter());
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr th:each="infoverbale : ${infoverbale}">
-                <td th:text="${infoverbale.codice}">Nome Corso</td>
+                <td th:text="${infoverbale.nomeCorso}">Nome Corso</td>
                 <td th:text="${#dates.format(infoverbale.dataAppello, 'dd/MM/yyyy')}">Data Appello</td>
                 <td th:text="${#dates.format(infoverbale.dataVerbale, 'dd/MM/yyyy HH:mm')}">Data Verbale</td>
             </tr>

@@ -53,7 +53,7 @@
                 </tr>
                 <tr>
                     <th class="label">Stato Valutazione</th>
-                    <td class="value" th:text="${infoAppello.statoDiValutazione}">stato</td>
+                    <td class="value" th:text="${infoAppello.statoDiValutazione.name() == 'NON_INSERITO' ? 'NON INSERITO' : infoAppello.statoDiValutazione}">stato</td>
                 </tr>
             </table>
             <div th:if="${#lists.contains({'18','19','20','21','22','23','24','25','26','27','28','29','30','30L'}, infoAppello.voto)} and ${infoAppello.statoDiValutazione.name() == 'PUBBLICATO'}" style="text-align:center; margin: 24px 0 0 0;">

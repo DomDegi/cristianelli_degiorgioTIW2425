@@ -44,7 +44,7 @@
                 <td style="padding: 12px; border: 1px solid #dee2e6;" th:text="${infoverbalizzati.cognome}">Rossi</td>
                 <td style="padding: 12px; border: 1px solid #dee2e6;" th:text="${infoverbalizzati.nome}">Mario</td>
                 <td style="padding: 12px; border: 1px solid #dee2e6;" th:text="${infoverbalizzati.voto}">28</td>
-                <td style="padding: 12px; border: 1px solid #dee2e6;" th:text="${infoverbalizzati.statoDiValutazione}">VERBALIZZATO</td>
+                <td style="padding: 12px; border: 1px solid #dee2e6;" th:text="${infoverbalizzati.statoDiValutazione.name() == 'NON_INSERITO' ? 'NON INSERITO' : infoverbalizzati.statoDiValutazione}">VERBALIZZATO</td>
             </tr>
         </tbody>
     </table>

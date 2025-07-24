@@ -52,7 +52,7 @@ public class PaginaVerbale extends HttpServlet {
             throws ServletException, IOException {
         UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
         if (utente == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/index.html");
             return;
         }
         if (!"docente".equals(utente.getRuolo())) {

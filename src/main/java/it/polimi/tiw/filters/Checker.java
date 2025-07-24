@@ -77,7 +77,7 @@ public class Checker implements Filter {
         // Controlla se l'utente è autenticato
         if (session == null || session.getAttribute("utente") == null) {
             System.out.println("Utente non autenticato, verrà reinderizzato al login");
-            res.sendRedirect(loginPath);
+            res.sendRedirect(loginPath.replace("/login", "/index.html"));
             return;
         }
         

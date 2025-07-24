@@ -52,7 +52,7 @@ public class ElencoVerbali extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
         if (utente == null) {
-            response.sendRedirect(getServletContext().getContextPath() + "/login");
+            response.sendRedirect(getServletContext().getContextPath() + "/index.html");
             return;
         }
         if (!"docente".equals(utente.getRuolo())) {

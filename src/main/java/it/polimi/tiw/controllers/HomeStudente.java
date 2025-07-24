@@ -49,6 +49,11 @@ public class HomeStudente extends HttpServlet {
             response.sendRedirect(getServletContext().getContextPath() + "/login");
             return;
         }
+        if (!"studente".equals(utente.getRuolo())) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("Utente non autorizzato");
+            return;
+        }
 
         StudenteDAO studenteDAO = new StudenteDAO(connection, utente.getIDUtente());
 

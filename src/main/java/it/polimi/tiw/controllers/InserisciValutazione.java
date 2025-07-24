@@ -45,6 +45,15 @@ public class InserisciValutazione extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+        if (utente == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        if (!"docente".equals(utente.getRuolo())) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("Utente non autorizzato");
+            return;
+        }
         JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(getServletContext());
         IWebExchange webExchange = application.buildExchange(request, response);
         WebContext ctx = new WebContext(webExchange, request.getLocale());

@@ -1,6 +1,6 @@
 package it.polimi.tiw.beans;
 
-public abstract class UtenteBean {
+public abstract sealed class UtenteBean permits StudenteBean, DocenteBean {
 	
 	private int id_utente;
 	private String email;
@@ -27,6 +27,6 @@ public abstract class UtenteBean {
 	
 	public String getCognome() { return cognome; }
 	public void setCognome(String cognome) { this.cognome = cognome;}
-	
-	
+
+	public abstract String getRuolo();
 }

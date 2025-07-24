@@ -89,9 +89,23 @@ public class CheckLogin extends HttpServlet {
             templateEngine.process("index.html", ctx, response.getWriter());
         } else {
             request.getSession().setAttribute("utente", utente);
-            String target = (utente instanceof it.polimi.tiw.beans.StudenteBean)
-                    ? "/home-studente"
-                    : "/home-docente";
+            String target;
+            switch (utente.getRuolo()) {
+                case "studente":
+                    target = "/home-studente";
+                    break;
+                case "docente":
+                    target = "/home-docente";
+                    break;
+                default:
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(getServletContext());
+                    IWebExchange webExchange = application.buildExchange(request, response);
+                    WebContext ctx = new WebContext(webExchange, request.getLocale());
+                    ctx.setVariable("errorMsg", "Utente non autorizzato");
+                    templateEngine.process("index.html", ctx, response.getWriter());
+                    return;
+            }
             response.sendRedirect(getServletContext().getContextPath() + target);
         }
     }

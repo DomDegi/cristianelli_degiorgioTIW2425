@@ -51,6 +51,15 @@ public class PaginaVerbale extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+        if (utente == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        if (!"docente".equals(utente.getRuolo())) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("Utente non autorizzato");
+            return;
+        }
         ValutazioneDAO valutazioneDAO;
         List<Integer> studentiDaAggiornare;
         int appid;

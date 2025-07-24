@@ -20,6 +20,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import it.polimi.tiw.beans.IscrittiBean;
 import it.polimi.tiw.beans.DocenteBean;
+import it.polimi.tiw.beans.UtenteBean;
 import it.polimi.tiw.dao.AppelloDAO;
 import it.polimi.tiw.dao.ValutazioneDAO;
 import it.polimi.tiw.utilities.DBConnection;
@@ -43,6 +44,16 @@ public class Iscritti extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+        if (utente == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        if (!"docente".equals(utente.getRuolo())) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("Utente non autorizzato");
+            return;
+        }
         DocenteBean docente = (DocenteBean) request.getSession().getAttribute("utente");
         JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(getServletContext());
         IWebExchange webExchange = application.buildExchange(request, response);

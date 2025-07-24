@@ -21,6 +21,7 @@ import java.util.List;
 import it.polimi.tiw.beans.AppelloBean;
 import it.polimi.tiw.beans.CorsoBean;
 import it.polimi.tiw.beans.DocenteBean;
+import it.polimi.tiw.beans.UtenteBean;
 import it.polimi.tiw.dao.CorsoDAO;
 import it.polimi.tiw.dao.DocenteDAO;
 import it.polimi.tiw.utilities.DBConnection;
@@ -44,12 +45,19 @@ public class HomeDocente extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DocenteBean docente = (DocenteBean) request.getSession().getAttribute("utente");
-        if (docente == null) {
-            response.sendRedirect(request.getContextPath() + "/index.html");
+        UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+        if (utente == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        DocenteDAO docenteDAO = new DocenteDAO(connection, docente.getIDUtente());
+        if (!utente.getRuolo().equals("docente")) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("Utente non autorizzato");
+            return;
+        }
+        DocenteDAO docenteDAO = new DocenteDAO(connection, utente.getIDUtente());
+
+        DocenteBean docente = (DocenteBean) utente;
 
         JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(getServletContext());
         IWebExchange webExchange = application.buildExchange(request, response);

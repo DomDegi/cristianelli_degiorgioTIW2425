@@ -58,6 +58,15 @@ public class EsitoStudente extends HttpServlet{
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		UtenteBean utente = (UtenteBean) request.getSession().getAttribute("utente");
+		if (utente == null) {
+			response.sendRedirect(getServletContext().getContextPath() + "/login");
+			return;
+		}
+		if (!"studente".equals(utente.getRuolo())) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			response.getWriter().write("Utente non autorizzato");
+			return;
+		}
 		JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(getServletContext());
 		IWebExchange webExchange = application.buildExchange(request, response);
 		WebContext ctx = new WebContext(webExchange, request.getLocale());

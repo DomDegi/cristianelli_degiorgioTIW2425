@@ -52,9 +52,13 @@ public class StudenteChecker implements Filter {
         }
 
         UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-        if (utente == null || !(utente instanceof StudenteBean)) {
-            System.out.println("L'utente non è uno studente, accesso negato");
+        if (utente == null) {
             res.sendRedirect(req.getContextPath() + "/index.html");
+            return;
+        }
+        if (!"studente".equals(utente.getRuolo())) {
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.getWriter().write("Utente non autorizzato");
             return;
         }
 

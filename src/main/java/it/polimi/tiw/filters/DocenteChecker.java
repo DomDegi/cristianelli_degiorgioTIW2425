@@ -41,9 +41,13 @@ public class DocenteChecker implements Filter {
         }
 
         UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-        if (utente == null || !(utente instanceof DocenteBean)) {
-            System.out.println("L'utente non è un docente, accesso negato");
+        if (utente == null) {
             res.sendRedirect(req.getContextPath() + "/index.html");
+            return;
+        }
+        if (!"docente".equals(utente.getRuolo())) {
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.getWriter().write("Utente non autorizzato");
             return;
         }
 

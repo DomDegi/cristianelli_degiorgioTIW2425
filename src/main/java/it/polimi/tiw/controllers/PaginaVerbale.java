@@ -78,23 +78,13 @@ public class PaginaVerbale extends HttpServlet {
 
             valutazioneDAO = new ValutazioneDAO(connection, appid);
 
-            // lista formata dagli id degli studenti che hanno lo stato di valutazione a
-            // pubblicato o rifiutato
             studentiDaAggiornare = valutazioneDAO.getIDStudentiPubbORif();
 
-            // aggiorno nel database lo stato degli studenti con stato di valutazione
-            // mettendolo a verbalizzato
-            // nel caso in cui uno studente abbia rifiutato, viene posto a rimandato
             valutazioneDAO.aggiornaVerbalizzato();
 
-            // carico le informazioni complete degli studenti di cui avevo preso l'id in
-            // studentiDaAggiornare
             studentiAggiornati = valutazioneDAO.getInfoStudentiAggiornati(appid, studentiDaAggiornare);
 
-            // creo il verbale
             valutazioneDAO.creaVerbale();
-
-            // carica le informazioni relative all'ultimo verbale creato
             verbale = valutazioneDAO.getUltimoVerbale();
         } catch (SQLException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore nel recuperare il verbale creato.");

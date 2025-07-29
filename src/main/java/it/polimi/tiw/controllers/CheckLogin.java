@@ -36,14 +36,12 @@ public class CheckLogin extends HttpServlet {
 
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setSuffix(".html");
-        // Imposta la directory dei template se necessario, es: templateResolver.setPrefix("/templates/");
         this.templateEngine = new TemplateEngine();
         this.templateEngine.setTemplateResolver(templateResolver);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Mostra la pagina di login
         JakartaServletWebApplication application = JakartaServletWebApplication.buildApplication(getServletContext());
         IWebExchange webExchange = application.buildExchange(request, response);
         WebContext ctx = new WebContext(webExchange, request.getLocale());

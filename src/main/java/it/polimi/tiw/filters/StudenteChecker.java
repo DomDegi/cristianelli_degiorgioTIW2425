@@ -14,29 +14,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-/**
- * Filter per l'autorizzazione degli studenti
- * Controlla che l'utente autenticato sia uno studente prima di accedere alle pagine degli studenti
- */
+
 public class StudenteChecker implements Filter {
 
-    /**
-     * Default constructor.
-     */
-    public StudenteChecker() {
-        // TODO Auto-generated constructor stub
-    }
 
-    /**
-     * @see Filter#destroy()
-     */
-    public void destroy() {
-        // TODO Auto-generated constructor stub
-    }
+    public StudenteChecker() {}
 
-    /**
-     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-     */
+    public void destroy() {}
+
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
@@ -62,15 +47,9 @@ public class StudenteChecker implements Filter {
             return;
         }
 
-        // Qui sei sicuro che è uno studente autenticato
         System.out.println("Studente autorizzato: " + utente.getEmail());
         chain.doFilter(request, response);
     }
 
-    /**
-     * @see Filter#init(FilterConfig)
-     */
-    public void init(FilterConfig fConfig) throws ServletException {
-        // TODO Auto-generated constructor stub
-    }
+    public void init(FilterConfig fConfig) throws ServletException {}
 } 

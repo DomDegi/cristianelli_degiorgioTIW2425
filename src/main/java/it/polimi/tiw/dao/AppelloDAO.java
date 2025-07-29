@@ -20,16 +20,15 @@ public class AppelloDAO {
         this.id_appello = id_appello;
     }
 
-    // Trova gli iscritti all'appello con info complete e ordinamento
     public List<IscrittiBean> cercaIscritti(String orderBy, String orderDirection) throws SQLException {
         List<IscrittiBean> iscrittiList = new ArrayList<>();
         Set<String> allowedOrderBy = Set.of("matricola", "nome", "cognome", "email", "corso_laurea", "voto", "stato_valutazione");
         Set<String> allowedDirections = Set.of("ASC", "DESC");
         if (orderBy == null || !allowedOrderBy.contains(orderBy)) {
-            orderBy = "cognome"; // default column
+            orderBy = "cognome"; 
         }
         if (orderDirection == null || !allowedDirections.contains(orderDirection.toUpperCase())) {
-            orderDirection = "ASC"; // default direction
+            orderDirection = "ASC"; 
         }
 
         String query = "SELECT s.id_studente, s.matricola, u.cognome, u.nome, u.email, s.corso_laurea, v.voto, v.stato_valutazione " +
@@ -60,7 +59,6 @@ public class AppelloDAO {
         return iscrittiList;
     }
 
-    // Aggiorna lo stato di valutazione a PUBBLICATO per tutti gli INSERITO
     public void aggiornaPubblicati() throws SQLException {
         String query = "UPDATE valutazione SET stato_valutazione = 'PUBBLICATO' WHERE id_appello = ? AND stato_valutazione = 'INSERITO';";
         try (PreparedStatement pstatement = con.prepareStatement(query)) {
@@ -69,7 +67,7 @@ public class AppelloDAO {
         }
     }
 
-    // Cerca id_docente per un appello
+   
     public int cercaIdDocentePerAppello() throws SQLException {
         String query = "SELECT c.id_docente FROM appello a JOIN corso c ON a.id_corso = c.id_corso WHERE a.id_appello = ?;";
         try (PreparedStatement pstatement = con.prepareStatement(query)) {

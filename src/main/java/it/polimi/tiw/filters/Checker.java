@@ -44,17 +44,13 @@ public class Checker implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
-        
-        // Percorsi pubblici che non richiedono autenticazione
         String loginPath = req.getContextPath() + "/index.html";
         String loginServletPath = req.getContextPath() + "/login";
         String cssPath = req.getContextPath() + "/styles/";
         String jsPath = req.getContextPath() + "/js/";
         String imagesPath = req.getContextPath() + "/images/";
         
-        String requestURI = req.getRequestURI();
-        
-        // Controlla se la richiesta è per una risorsa pubblica
+        String requestURI = req.getRequestURI(); 
         boolean isPublicResource = requestURI.equals(loginPath) || 
                                    requestURI.equals(loginServletPath) ||
                                    requestURI.startsWith(cssPath) ||
@@ -68,20 +64,17 @@ public class Checker implements Filter {
                                    requestURI.endsWith(".gif") ||
                                    requestURI.endsWith(".ico");
         
-        // Se è una risorsa pubblica, lascia passare
         if (isPublicResource) {
             chain.doFilter(request, response);
             return;
         }
         
-        // Controlla se l'utente è autenticato
         if (session == null || session.getAttribute("utente") == null) {
             System.out.println("Utente non autenticato, verrà reinderizzato al login");
             res.sendRedirect(loginPath.replace("/login", "/index.html"));
             return;
         }
-        
-        // Utente autenticato, continua con la richiesta
+       
         System.out.println("Utente autenticato: " + session.getAttribute("utente"));
         chain.doFilter(request, response);
     }

@@ -30,7 +30,7 @@ public class Logout extends HttpServlet {
 	 */
 	public Logout() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public void init() throws ServletException {
 		this.connection = DBConnection.getConnection(getServletContext());
@@ -51,7 +51,7 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -61,8 +61,8 @@ public class Logout extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getSession().invalidate(); // Invalida la sessione
-		response.sendRedirect("index.html"); // Redirige alla pagina di login
+		request.getSession().invalidate(); 
+		response.sendRedirect("index.html"); 
 	}
 
 }

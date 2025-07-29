@@ -82,10 +82,10 @@ public class Iscritti extends HttpServlet {
             ctx.setVariable("orderBy", orderBy);
             ctx.setVariable("orderDirection", orderDirection);
 
-            // Controlla se ci sono studenti da verbalizzare (PUBBLICATO o RIFIUTATO)
             ValutazioneDAO valutazioneDAO = new ValutazioneDAO(connection, id_appello);
             List<Integer> studentiDaVerbalizzare = valutazioneDAO.getIDStudentiPubbORif();
             boolean ciSonoStudentiDaVerbalizzare = !studentiDaVerbalizzare.isEmpty();
+            
             ctx.setVariable("ciSonoStudentiDaVerbalizzare", ciSonoStudentiDaVerbalizzare);
 
         } catch (SQLException e) {

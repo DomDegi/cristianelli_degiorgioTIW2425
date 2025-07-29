@@ -36,12 +36,7 @@ public class EsitoStudente extends HttpServlet{
 	private Connection connection = null;
 	private TemplateEngine templateEngine;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public EsitoStudente() {
-		// TODO Auto-generated constructor stub
-	}
+	public EsitoStudente() {}
 	
 	public void init() throws ServletException {
 		this.connection = DBConnection.getConnection(getServletContext());
@@ -79,7 +74,6 @@ public class EsitoStudente extends HttpServlet{
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Non sei iscritto a questo appello");
 				return;
 			}
-			// Caricamento le informazioni dell'appello dello studente
 			StudenteAppelloBean infoAppello = studenteDAO.getInfoAppello(id_appello);
 			if (infoAppello.getVoto() == null) {
 				ctx.setVariable("erroreAppello", "Non ti sei iscritto a questo appello");
@@ -108,9 +102,10 @@ public class EsitoStudente extends HttpServlet{
 
 		StudenteDAO studenteDAO = new StudenteDAO(connection, utente.getIDUtente());
 
-		// aggiorno lo stato di valutazione nel database ponendolo a rifiutato
 		try {
+			
 			studenteDAO.setRifiutato(id_appello);
+			
 		} catch (SQLException e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Impossibile rifiutare il voto");
 			return;

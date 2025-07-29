@@ -52,7 +52,7 @@ public class StudenteDAO {
                        "FROM appello a " +
                        "JOIN valutazione v ON a.id_appello = v.id_appello " +
                        "WHERE a.id_corso = ? AND v.id_studente = ? " +
-                       "ORDER BY a.data;";
+                       "ORDER BY a.data DESC;";
 		try (PreparedStatement pstatement = connection.prepareStatement(query)) {
 			pstatement.setInt(1, id_corso);
 			pstatement.setInt(2, id_studente);
